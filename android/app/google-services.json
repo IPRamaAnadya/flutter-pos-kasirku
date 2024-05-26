@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "752711738317",
+    "project_id": "pos-kasirku",
+    "storage_bucket": "pos-kasirku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752711738317:android:babe35d43fe6c4534a5a84",
+        "android_client_info": {
+          "package_name": "com.iprama.pos.kasirku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752711738317-dqh7q9hllp5du95pgfuheade19lu3kd4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2cjQ7zidqvODXr05AUQLQuoNozzs9d6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752711738317-dqh7q9hllp5du95pgfuheade19lu3kd4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "752711738317-fjq1nmqaj8an2gvglgsntou2usvekc7a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.iprama.pos.kasirku"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
