@@ -46,6 +46,11 @@ dependencies:
   # AUTH
   google_sign_in: ^6.2.1
 
+  # UTILS
+  google_fonts: ^6.2.1
+  get_it: ^7.7.0
+  uuid: ^4.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

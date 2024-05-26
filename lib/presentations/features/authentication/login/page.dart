@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pos/presentations/commons/styles/color.dart';
 import 'package:pos/presentations/commons/styles/images.dart';
 import 'package:pos/presentations/commons/styles/text.dart';
-import 'package:pos/presentations/features/authentication/login_provider.dart';
+import 'package:pos/presentations/features/authentication/login/provider.dart';
+import 'package:pos/presentations/features/stores/create_store/page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = "login";
@@ -19,7 +21,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    _loginProvider = LoginProvider();
+
+    Future.microtask((){
+      _loginProvider = Provider.of<LoginProvider>(context, listen: false);
+    });
+
     super.initState();
   }
 
@@ -82,7 +88,12 @@ class _LoginPageState extends State<LoginPage> {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: ()async{
-                        await _loginProvider.signInWithGoogle();
+                        await _loginProvider.signInWithGoogle().then((res) {
+                          print("########## RES: $res");
+                          if(res) {
+                            Navigator.of(context).pushNamed(CreateStorePage.routeName);
+                          }
+                        });
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

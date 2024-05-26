@@ -1,8 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pos/presentations/features/authentication/login.dart';
-
+import 'package:pos/presentations/features/authentication/login/page.dart';
+import 'package:pos/presentations/features/authentication/login/provider.dart';
+import 'package:pos/presentations/features/stores/create_store/page.dart';
+import 'package:pos/presentations/features/stores/create_store/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+import 'injection.dart' as di;
 import 'firebase_options.dart';
+
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+var uuid = Uuid();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +20,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  di.init();
 
   runApp(const MyApp());
 }
@@ -20,9 +32,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Kasirku',
-      home: LoginPage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => di.locator<LoginProvider>()),
+        ChangeNotifierProvider(create: (_) => di.locator<CreateStoreProvider>()),
+      ],
+      child: MaterialApp(
+        title: 'Kasirku',
+        home: LoginPage(),
+        debugShowCheckedModeBanner: false,
+        navigatorObservers: [routeObserver],
+        navigatorKey: navigatorKey,
+        onGenerateRoute: (RouteSettings settings) {
+          switch (settings.name) {
+            case LoginPage.routeName:
+              return CupertinoPageRoute(builder: (context) => LoginPage());
+            case CreateStorePage.routeName:
+              return CupertinoPageRoute(builder: (context) => CreateStorePage());
+          }
+        },
+      ),
     );
   }
 }
