@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:pos/core/utils/extension_int_currency.dart';
 import 'package:pos/presentations/commons/styles/color.dart';
 import 'package:pos/presentations/commons/styles/text.dart';
 import 'package:pos/presentations/features/products/provider.dart';
@@ -164,7 +163,7 @@ class _ProductListPageState extends State<ProductListPage> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     SizedBox(height: 5,),
-                                    Text("${product.unit ?? "-"} ${product.price ?? "-"}",
+                                    Text("${(product.price ?? 0).toRupiah}",
                                       style: AppSText.title.copyWith(color: AppColor.secondary500),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
