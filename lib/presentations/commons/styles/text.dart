@@ -11,10 +11,16 @@ class AppSText {
     height: 1
   );
 
+  static TextStyle get title => GoogleFonts.poppins(
+      fontWeight: FontWeight.w700,
+      fontSize: 14,
+      color: Colors.black
+  );
+
   static TextStyle get body => GoogleFonts.poppins(
       fontWeight: FontWeight.w500,
       fontSize: 12,
-      color: Colors.black
+      color: Colors.grey.shade700
   );
 
   static TextStyle get hint => GoogleFonts.poppins(

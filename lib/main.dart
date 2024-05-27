@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/presentations/features/authentication/login/page.dart';
 import 'package:pos/presentations/features/authentication/login/provider.dart';
+import 'package:pos/presentations/features/products/list.dart';
+import 'package:pos/presentations/features/products/list.dart';
+import 'package:pos/presentations/features/products/provider.dart';
 import 'package:pos/presentations/features/stores/create_store/page.dart';
 import 'package:pos/presentations/features/stores/create_store/provider.dart';
 import 'package:provider/provider.dart';
@@ -36,10 +39,11 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => di.locator<LoginProvider>()),
         ChangeNotifierProvider(create: (_) => di.locator<CreateStoreProvider>()),
+        ChangeNotifierProvider(create: (_) => di.locator<ProductProvider>()),
       ],
       child: MaterialApp(
         title: 'Kasirku',
-        home: LoginPage(),
+        home: ProductListPage(),
         debugShowCheckedModeBanner: false,
         navigatorObservers: [routeObserver],
         navigatorKey: navigatorKey,
@@ -49,6 +53,8 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (context) => LoginPage());
             case CreateStorePage.routeName:
               return CupertinoPageRoute(builder: (context) => CreateStorePage());
+            case ProductListPage.routeName:
+              return CupertinoPageRoute(builder: (context) => ProductListPage());
           }
         },
       ),

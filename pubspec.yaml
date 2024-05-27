@@ -51,6 +51,12 @@ dependencies:
   get_it: ^7.7.0
   uuid: ^4.4.0
 
+  # STORAGE
+  shared_preferences: ^2.2.3
+
+  # WIDGET
+  cached_network_image: ^3.3.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
