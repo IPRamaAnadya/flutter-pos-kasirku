@@ -9,10 +9,13 @@ class ProductModel {
   String? skuNumber;
   String? description;
   String? photoUrl;
+  int? purchasePrice;
   int? price;
   String? unit;
   DateTime? createdAt;
   DateTime? updatedAt;
+  bool? isFavorite;
+  int? discount;
 
   ProductModel({
     required this.id,
@@ -20,11 +23,14 @@ class ProductModel {
     this.otherName,
     this.description,
     this.photoUrl,
+    this.purchasePrice,
     this.price,
     this.unit,
     this.skuNumber,
     this.createdAt,
     this.updatedAt,
+    this.isFavorite,
+    this.discount,
   }) {
     unit ??= "Rp.";
   }
@@ -39,11 +45,14 @@ class ProductModel {
     otherName: json["other_name"],
     description: json["description"],
     photoUrl: json["photoURL"],
+    purchasePrice: json["purchase_price"],
     price: json["price"],
     unit: json["unit"],
     skuNumber: json["sku_number"],
     createdAt: json["created_at"] != null ? DateTime.parse(json["created_at"]) : null,
     updatedAt: json["created_at"] != null ? DateTime.parse(json["updated_at"]) : null,
+    isFavorite: json["is_favorite"],
+    discount: json["discount"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -52,11 +61,14 @@ class ProductModel {
     "other_name": otherName,
     "description": description,
     "photoURL": photoUrl,
+    "purchase_price": purchasePrice,
     "price": price,
     "unit": unit,
     "sku_number": skuNumber,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
+    "is_favorite": isFavorite,
+    "discount": discount,
   };
 
   // Mapping method from ProductEntity
@@ -72,6 +84,7 @@ class ProductModel {
       skuNumber: entity.skuNumber,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
+      discount: entity.discount,
     );
   }
 
@@ -83,11 +96,13 @@ class ProductModel {
       otherName: otherName ?? '',
       description: description ?? '',
       photoUrl: photoUrl ?? '',
+      purchasePrice: purchasePrice ?? 0,
       price: price ?? 0,
       unit: unit ?? 'RP',
       skuNumber: skuNumber,
       createdAt: createdAt,
       updatedAt: updatedAt,
+      discount: discount ?? 0,
     );
   }
 }
