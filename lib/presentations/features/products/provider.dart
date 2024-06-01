@@ -13,8 +13,25 @@ class ProductProvider extends ChangeNotifier {
   List<ProductEntity> get products => _products;
 
   void getProductsList() async {
+    _products.clear();
     _allProducts = await _productUsecase.getProductsList() ?? [];
-    _products = _allProducts;
+    _products.addAll(_allProducts);
+    notifyListeners();
+  }
+
+  void clearDisplayedProducts() {
+    _products.clear();
+    notifyListeners();
+  }
+
+  void displayAllProducts() {
+    _products.clear();
+    if(_allProducts.isEmpty) {
+      getProductsList();
+      return;
+    }
+
+    _products.addAll(_allProducts);
     notifyListeners();
   }
 
@@ -43,6 +60,8 @@ class ProductProvider extends ChangeNotifier {
 
   // Search method
   void searchProducts(String query) {
+    print("## QUERY $query");
+    print("## jumlah data ${_allProducts.length}");
     if (query.isEmpty) {
       _products = _allProducts;
     } else {
@@ -54,6 +73,7 @@ class ProductProvider extends ChangeNotifier {
         return nameMatches || otherNameMatches || skuMatches;
       }).toList();
     }
+    print("## QUERY ${_products.length}");
     notifyListeners();
   }
 

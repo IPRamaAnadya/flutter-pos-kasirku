@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:pos/core/utils/extension_int_currency.dart';
 import 'package:pos/presentations/commons/styles/color.dart';
 import 'package:pos/presentations/commons/styles/text.dart';
+import 'package:pos/presentations/features/cart/provider.dart';
 import 'package:pos/presentations/features/products/provider.dart';
+import 'package:pos/presentations/features/products/scanner.dart';
 import 'package:provider/provider.dart';
 
 class ProductListPage extends StatefulWidget {
@@ -19,6 +21,7 @@ class ProductListPage extends StatefulWidget {
 class _ProductListPageState extends State<ProductListPage> {
 
   late ProductProvider _productProvider;
+  late CartProvider _cartProvider;
 
   TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
@@ -26,7 +29,10 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   void initState() {
     Future.microtask(() {
+
       _productProvider = Provider.of<ProductProvider>(context, listen: false);
+      _cartProvider = Provider.of<CartProvider>(context, listen: false);
+
       _productProvider.getProductsList();
     });
     _searchController.addListener(_onSearchChanged);
@@ -54,8 +60,8 @@ class _ProductListPageState extends State<ProductListPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
-        child: Consumer<ProductProvider>(
-          builder: (context, data, child) {
+        child: Consumer2<ProductProvider, CartProvider>(
+          builder: (context, data, dataInCart, child) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: RefreshIndicator(
@@ -108,15 +114,24 @@ class _ProductListPageState extends State<ProductListPage> {
                             ),
                           ),
                           SizedBox(width: 5,),
-                          Container(
-                            height: 55,
-                            width: 55,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(1),
-                              color: AppColor.secondary200
-                            ),
-                            child: Center(
-                              child: Icon(Icons.barcode_reader, color: AppColor.primary700,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const BarcodeScannerWithController(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 55,
+                              width: 55,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(1),
+                                color: AppColor.secondary200
+                              ),
+                              child: Center(
+                                child: Icon(Icons.barcode_reader, color: AppColor.primary700,),
+                              ),
                             ),
                           )
                         ],
@@ -163,26 +178,73 @@ class _ProductListPageState extends State<ProductListPage> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     SizedBox(height: 5,),
-                                    Text("${(product.price ?? 0).toRupiah}",
+                                    Text("Rp ${(product.price ?? 0)}",
                                       style: AppSText.title.copyWith(color: AppColor.secondary500),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     SizedBox(height: 5,),
                                     Expanded(
-                                      child: InkWell(
+                                      child: !_cartProvider.isProductInCart(product)
+                                      ? InkWell(
                                         onTap: (){
-                                            HapticFeedback.lightImpact();
-                                          },
+                                          HapticFeedback.lightImpact();
+                                          _cartProvider.increaseProduct(product);
+                                        },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: AppColor.primary700,
-                                            borderRadius: BorderRadius.circular(1)
+                                              color: AppColor.primary700,
+                                              borderRadius: BorderRadius.circular(1)
                                           ),
                                           child: Center(child: Text("Tambah",
                                             style: AppSText.body.copyWith(color: Colors.white),
                                           )),
                                         ),
+                                      )
+                                      : Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          InkWell(
+                                            onTap: (){
+                                              HapticFeedback.lightImpact();
+                                              _cartProvider.decreaseProduct(product);
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColor.primary700,
+                                              ),
+                                              height: 35,
+                                              width: 35,
+                                              child: Icon(Icons.remove, color: Colors.white,),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                            ),
+                                            height: 35,
+                                            width: 35,
+                                            child: Center(
+                                              child: Text("${_cartProvider.getProductCount(product)}",
+                                                style: AppSText.title,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: (){
+                                              HapticFeedback.lightImpact();
+                                              _cartProvider.increaseProduct(product);
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColor.primary700,
+                                              ),
+                                              height: 35,
+                                              width: 35,
+                                              child: Icon(Icons.add, color: Colors.white,),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     )
                                   ],

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/presentations/features/authentication/login/page.dart';
 import 'package:pos/presentations/features/authentication/login/provider.dart';
+import 'package:pos/presentations/features/cart/provider.dart';
 import 'package:pos/presentations/features/products/list.dart';
 import 'package:pos/presentations/features/products/list.dart';
 import 'package:pos/presentations/features/products/provider.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => di.locator<LoginProvider>()),
         ChangeNotifierProvider(create: (_) => di.locator<CreateStoreProvider>()),
         ChangeNotifierProvider(create: (_) => di.locator<ProductProvider>()),
+        ChangeNotifierProvider(create: (_) => di.locator<CartProvider>()),
       ],
       child: MaterialApp(
         title: 'Kasirku',
