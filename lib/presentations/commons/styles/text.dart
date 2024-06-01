@@ -34,4 +34,11 @@ class AppSText {
       fontSize: 14,
       color: Colors.black
   );
+
+  static TextStyle get caption => GoogleFonts.poppins(
+      fontWeight: FontWeight.w400,
+      fontSize: 10,
+      color: Colors.grey.shade400
+  );
+
 }

@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/presentations/features/authentication/login/page.dart';
 import 'package:pos/presentations/features/authentication/login/provider.dart';
+import 'package:pos/presentations/features/cart/preview.dart';
 import 'package:pos/presentations/features/cart/provider.dart';
-import 'package:pos/presentations/features/products/list.dart';
 import 'package:pos/presentations/features/products/list.dart';
 import 'package:pos/presentations/features/products/provider.dart';
 import 'package:pos/presentations/features/stores/create_store/page.dart';
@@ -16,7 +16,7 @@ import 'firebase_options.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-var uuid = Uuid();
+var uuid = const Uuid();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Kasirku',
-        home: ProductListPage(),
+        home: CartPreview(),
         debugShowCheckedModeBanner: false,
         navigatorObservers: [routeObserver],
         navigatorKey: navigatorKey,
