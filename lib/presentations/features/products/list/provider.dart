@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pos/domain/usecases/product/usecase.dart';
 
-import '../../../domain/entities/product.dart';
+import '../../../../domain/entities/product.dart';
 
 class ProductProvider extends ChangeNotifier {
 

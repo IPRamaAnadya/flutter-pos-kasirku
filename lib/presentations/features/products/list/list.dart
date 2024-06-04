@@ -6,8 +6,8 @@ import 'package:pos/core/utils/extension_int_currency.dart';
 import 'package:pos/presentations/commons/styles/color.dart';
 import 'package:pos/presentations/commons/styles/text.dart';
 import 'package:pos/presentations/features/cart/provider.dart';
-import 'package:pos/presentations/features/products/provider.dart';
-import 'package:pos/presentations/features/products/scanner.dart';
+import 'package:pos/presentations/features/products/list/provider.dart';
+import 'package:pos/presentations/features/products/list/scanner.dart';
 import 'package:provider/provider.dart';
 
 class ProductListPage extends StatefulWidget {

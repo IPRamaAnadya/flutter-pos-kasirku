@@ -23,6 +23,12 @@ class AppSText {
       color: Colors.grey.shade700
   );
 
+  static TextStyle get label => GoogleFonts.poppins(
+      fontWeight: FontWeight.w600,
+      fontSize: 12,
+      color: Colors.black
+  );
+
   static TextStyle get hint => GoogleFonts.poppins(
       fontWeight: FontWeight.w400,
       fontSize: 12,

@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/presentations/features/authentication/login/page.dart';
 import 'package:pos/presentations/features/authentication/login/provider.dart';
-import 'package:pos/presentations/features/cart/preview.dart';
 import 'package:pos/presentations/features/cart/provider.dart';
-import 'package:pos/presentations/features/products/list.dart';
-import 'package:pos/presentations/features/products/provider.dart';
+import 'package:pos/presentations/features/checkout/page.dart';
+import 'package:pos/presentations/features/products/list/list.dart';
+import 'package:pos/presentations/features/products/list/provider.dart';
 import 'package:pos/presentations/features/stores/create_store/page.dart';
 import 'package:pos/presentations/features/stores/create_store/provider.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Kasirku',
-        home: CartPreview(),
+        home: CheckoutPage(),
         debugShowCheckedModeBanner: false,
         navigatorObservers: [routeObserver],
         navigatorKey: navigatorKey,

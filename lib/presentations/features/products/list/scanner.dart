@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:pos/presentations/features/cart/provider.dart';
-import 'package:pos/presentations/features/products/provider.dart';
+import 'package:pos/presentations/features/products/list/provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../commons/styles/color.dart';
-import '../../commons/styles/text.dart';
+import '../../../commons/styles/color.dart';
+import '../../../commons/styles/text.dart';
 
 class BarcodeScannerWithController extends StatefulWidget {
   const BarcodeScannerWithController({super.key});
